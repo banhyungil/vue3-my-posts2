@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+import MyMenu from "./components/MyMenu.vue";
 </script>
 
 <template>
   <div>
-    <h1>Main</h1>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
+    <nav class="gr">
+      <MyMenu></MyMenu>
+      <input type="button" value="글쓰기" class="btn-write" />
     </nav>
     <main>
       <RouterView></RouterView>
@@ -14,4 +15,27 @@ import { RouterLink } from "vue-router";
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.gr {
+  display: grid;
+  grid-template-columns: calc(100% - 100px) 100px;
+  background-color: #0d6efd;
+  padding: 10px;
+}
+
+.btn-write {
+  color: #f8f9fa;
+  font-weight: bold;
+  font-size: 15px;
+
+  background-color: #0d6efd;
+  border: 1px solid #f8f9fa;
+
+  cursor: pointer;
+}
+
+.btn-write:hover {
+  background-color: #f8f9fa;
+  color: #000;
+}
+</style>
