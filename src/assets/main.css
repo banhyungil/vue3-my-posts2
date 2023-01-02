@@ -6,7 +6,7 @@ body {
     margin: 0;
 }
 
-.fr {
+.fr-center {
     display: flex;
     align-items: center;
     justify-content: center;

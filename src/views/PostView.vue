@@ -7,22 +7,26 @@
     <body>
       <p>{{ post.content }}</p>
     </body>
-    <div>
-      <input
-        type="button"
-        @click="onPrevClicked"
-        value="이전"
-        :disabled="post.id - 1 == 0"
-      />
-      <input
-        type="button"
-        @click="onNextClicked"
-        value="다음"
-        :disabled="isNextDisabled"
-      />
-      <input type="button" @click="onListClicked" value="목록" />
-      <input type="button" @click="onUpdateClicked" value="수정" />
-      <input type="button" @click="onRemoveClicked" value="삭제" />
+    <div class="fr">
+      <div class="move-page-cont">
+        <input
+          type="button"
+          @click="onPrevClicked"
+          value="이전"
+          :disabled="post.id - 1 == 0"
+        />
+        <input
+          type="button"
+          @click="onNextClicked"
+          value="다음"
+          :disabled="isNextDisabled"
+        />
+      </div>
+      <div>
+        <input type="button" @click="onListClicked" value="목록" />
+        <input type="button" @click="onUpdateClicked" value="수정" />
+        <input type="button" @click="onRemoveClicked" value="삭제" />
+      </div>
     </div>
   </div>
 </template>
@@ -73,4 +77,10 @@ function onRemoveClicked() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.fr {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 5px;
+}
+</style>

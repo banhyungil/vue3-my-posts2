@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import MyPostItem from "@/components/MyPostItem.vue";
 import type { Post } from "@/types";
-import { onMounted, ref, type Ref } from "vue";
+import { onMounted, ref } from "vue";
 import { format } from "date-fns";
 import { PostFetcher } from "@/api/posts";
 
