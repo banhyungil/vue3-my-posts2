@@ -1,15 +1,10 @@
 <template>
   <div class="">
-    <template v-for="route in routes" :key="route.path"
-      ><RouterLink :to="route.path" active-class="active">{{
-        route.name
-      }}</RouterLink></template
-    >
+    ><RouterLink to="/" active-class="active">HOME</RouterLink>
   </div>
 </template>
 
 <script setup lang="ts">
-import { routes } from "@/router";
 import { RouterLink } from "vue-router";
 </script>
 
@@ -17,5 +12,9 @@ import { RouterLink } from "vue-router";
 .active {
   color: #ffffff;
   font-size: 20px;
+}
+
+a:hover {
+  color: #000;
 }
 </style>

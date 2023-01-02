@@ -5,3 +5,13 @@
 body {
     margin: 0;
 }
+
+.fr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+}

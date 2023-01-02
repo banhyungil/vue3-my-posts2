@@ -1,17 +1,22 @@
 <template>
   <div class="fr">
-    <p class="post-title">{{ post.title }}</p>
-    <small class="post-author">{{ post.author }}</small>
+    <p class="post-title" @click="onTitleClicked">{{ post.title }}</p>
+    <small class="post-author">{{ `${post.date}, ${post.author}` }}</small>
   </div>
 </template>
 
 <script setup lang="ts">
+import router from "@/router";
 import type { Post } from "@/types";
 import type { PropType } from "vue";
 
-defineProps({
+const props = defineProps({
   post: { type: Object as PropType<Post>, required: true },
 });
+
+function onTitleClicked() {
+  router.push(`/post/${props.post.id}`);
+}
 </script>
 
 <style scoped>
