@@ -1,5 +1,5 @@
 <template>
-  <div class="fr"><h1>게시글 목록</h1></div>
+  <div class="fr-center"><h1>게시글 목록</h1></div>
   <hr />
   <div class="gr-post">
     <template v-for="post in posts" :key="post.id">

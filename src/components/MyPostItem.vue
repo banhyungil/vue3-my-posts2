@@ -6,10 +6,11 @@
 </template>
 
 <script setup lang="ts">
-import router from "@/router";
 import type { Post } from "@/types";
 import type { PropType } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const props = defineProps({
   post: { type: Object as PropType<Post>, required: true },
 });

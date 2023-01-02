@@ -1,5 +1,4 @@
 import HomeView from "@/views/HomeView.vue";
-import PostView from "@/views/PostView.vue";
 import PostUpdateView from "@/views/PostUpdateView.vue";
 // typescript 3.8 import 문법, type import, typescript가 compile하며 runtime에서 제거된다.
 import { createRouter, createWebHistory, type RouterOptions } from "vue-router";
@@ -12,16 +11,18 @@ const routes = [
   },
   {
     path: "/post/:id",
-    component: PostView,
+    name: "PostView",
+    component: () => import("@/views/PostView.vue"),
   },
   {
     path: "/post/:id/update",
+    name: "PostUpdate",
     component: PostUpdateView,
   },
 ];
 
 const routerOption: RouterOptions = {
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 };
 

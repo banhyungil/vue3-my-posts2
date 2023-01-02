@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <input type="text" v-model="newPost.title" />
+      <input type="text" v-model="newPost.title" class="text-ellipsis" />
     </header>
     <hr />
     <body>
@@ -16,11 +16,11 @@
 
 <script setup lang="ts">
 import { PostFetcher } from "@/api/posts";
-import router from "@/router";
 import type { Post } from "@/types";
 import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
+const router = useRouter();
 const route = useRoute();
 const id = route.params.id as string;
 const post = ref(fetchPost(Number(id)));
