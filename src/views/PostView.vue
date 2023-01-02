@@ -6,7 +6,6 @@
     <hr />
     <body>
       <p>{{ post.content }}</p>
-      <textarea>안녕</textarea>
     </body>
     <div>
       <input
@@ -68,7 +67,10 @@ function onUpdateClicked() {
   router.push(`/post/${post.value.id}/update`);
 }
 
-function onRemoveClicked() {}
+function onRemoveClicked() {
+  PostFetcher.remove(post.value.id);
+  router.push("/");
+}
 </script>
 
 <style scoped></style>

@@ -26,4 +26,10 @@ export const PostFetcher = {
     posts[idx] = post;
     localStorage.setItem("posts", JSON.stringify(posts));
   },
+  remove(id: number) {
+    const idx = posts.findIndex((post) => post.id == id);
+    posts.splice(idx, 1);
+
+    localStorage.setItem("posts", JSON.stringify(posts));
+  },
 };

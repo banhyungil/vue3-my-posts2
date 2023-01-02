@@ -11,24 +11,27 @@
 <script setup lang="ts">
 import MyPostItem from "@/components/MyPostItem.vue";
 import type { Post } from "@/types";
-import { ref, type Ref } from "vue";
+import { onMounted, ref, type Ref } from "vue";
 import { format } from "date-fns";
+import { PostFetcher } from "@/api/posts";
 
-const posts: Ref<Post[]> = ref([]);
+onMounted(() => {
+  const newPosts = [] as Post[];
+  for (let i = 1; i < 11; ++i) {
+    const obj = {
+      id: i,
+      title: i + "제목",
+      content: i + "내용. 반갑습니다.",
+      date: format(new Date(), "yyyy/MM/dd"),
+      author: i + "half",
+    };
 
-for (let i = 1; i < 11; ++i) {
-  const obj = {
-    id: i,
-    title: i + "제목",
-    content: i + "내용. 반갑습니다.",
-    date: format(new Date(), "yyyy/MM/dd"),
-    author: i + "half",
-  };
+    newPosts.push(obj);
+  }
+  localStorage.setItem("posts", JSON.stringify(newPosts));
+});
 
-  posts.value.push(obj);
-}
-
-localStorage.setItem("posts", JSON.stringify(posts.value));
+const posts = ref(PostFetcher.fetchAll());
 </script>
 
 <style scoped>
