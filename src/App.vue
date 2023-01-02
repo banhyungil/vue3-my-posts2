@@ -4,7 +4,7 @@ import MyMenu from "./components/MyMenu.vue";
 
 <template>
   <div>
-    <nav class="gr">
+    <nav class="gr bg-blue-600">
       <MyMenu></MyMenu>
       <input type="button" value="글쓰기" class="btn-write" />
     </nav>
@@ -18,7 +18,6 @@ import MyMenu from "./components/MyMenu.vue";
 .gr {
   display: grid;
   grid-template-columns: calc(100% - 100px) 100px;
-  background-color: #0d6efd;
   padding: 10px;
 }
 

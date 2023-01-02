@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <h1>{{ post.title }}</h1>
+      <h1 class="text-xl">{{ post.title }}</h1>
     </header>
     <hr />
     <body>

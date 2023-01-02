@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    ><RouterLink to="/" active-class="active">HOME</RouterLink>
+    <RouterLink to="/" active-class="active">HOME</RouterLink>
   </div>
 </template>
 
@@ -11,9 +11,12 @@ import { RouterLink } from "vue-router";
 <style scoped>
 .active {
   color: #ffffff;
-  font-size: 20px;
 }
 
+a {
+  color: #ddd;
+  font-size: 20px;
+}
 a:hover {
   color: #000;
 }
