@@ -1,48 +1,45 @@
 <template>
   <div>
-    <header>
+    <header class="flex flex-row justify-center">
       <h1 class="text-2xl">{{ post.title }}</h1>
     </header>
     <hr />
     <main>
       <p>{{ post.content }}</p>
     </main>
-    <div class="fr">
+    <div class="flex justify-between">
       <div class="move-page-cont">
         <input
           type="button"
           @click="onPrevClicked"
           value="이전"
           :disabled="isPrevDisabled"
-          class="p-2 bg-green-400 text-slate-200 font-bold"
+          :class="{ disable: isPrevDisabled }"
+          class="btn"
         />
         <input
           type="button"
           @click="onNextClicked"
           value="다음"
           :disabled="isNextDisabled"
-          class="p-2 bg-green-400 text-slate-200 font-bold"
+          :class="{ disable: isNextDisabled }"
+          class="btn"
         />
       </div>
       <div>
         <h1>안녕</h1>
-        <input
-          type="button"
-          @click="onListClicked"
-          value="목록"
-          class="p-2 bg-green-400 text-slate-200 font-bold"
-        />
+        <input type="button" @click="onListClicked" value="목록" class="btn" />
         <input
           type="button"
           @click="onUpdateClicked"
           value="수정"
-          class="p-2 bg-green-400 text-slate-200 font-bold"
+          class="btn"
         />
         <input
           type="button"
           @click="onRemoveClicked"
           value="삭제"
-          class="p-2 bg-green-400 text-slate-200 font-bold"
+          class="btn"
         />
       </div>
     </div>
@@ -52,7 +49,7 @@
 <script setup lang="ts">
 import { PostFetcher } from "@/api/posts";
 import type { Post } from "@/types";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
@@ -61,8 +58,13 @@ const id = route.params.id as string;
 const post = ref(fetchPost(Number(id)));
 
 const maxPost = PostFetcher.fetchMax() as Post;
-const isPrevDisabled = post.value.id - 1 == 0;
-const isNextDisabled = post.value.id + 1 > maxPost.id;
+
+const isPrevDisabled = computed(() => {
+  return post.value.id - 1 == 0;
+});
+const isNextDisabled = computed(() => {
+  return post.value.id + 1 > maxPost.id;
+});
 
 function onPrevClicked() {
   const prevId = post.value.id - 1;
@@ -96,10 +98,4 @@ function onRemoveClicked() {
 }
 </script>
 
-<style scoped>
-.fr {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 5px;
-}
-</style>
+<style scoped></style>
