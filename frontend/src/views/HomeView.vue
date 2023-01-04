@@ -3,13 +3,13 @@
   <hr />
   <div class="gr-post">
     <template v-for="post in posts" :key="post.id">
-      <MyPostItem :post="post"></MyPostItem>
+      <PostItem :post="post"></PostItem>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import MyPostItem from "@/components/MyPostItem.vue";
+import PostItem from "@/components/PostItem.vue";
 import type { Post } from "@/types";
 import { onMounted, ref } from "vue";
 import { format } from "date-fns";

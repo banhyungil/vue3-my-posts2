@@ -21,6 +21,7 @@ export const PostFetcher = {
     const maxId = CollectionUtils.max(posts.map((post) => post.id));
     return posts.find((post) => post.id == maxId);
   },
+  // post id가 없는 경우는 어떻게 처리하지? crud에서 create는 별도로 구별해야하나....
   save(post: Post) {
     const idx = posts.findIndex((item) => item.id == post.id);
     posts[idx] = post;

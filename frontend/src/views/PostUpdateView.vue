@@ -1,46 +1,27 @@
 <template>
   <div>
-    <header>
-      <input
-        type="text"
-        v-model="newPost.title"
-        class="input-text w-full my-2"
-      />
-    </header>
-    <hr />
-    <main>
-      <textarea
-        v-model="newPost.content"
-        class="text-area w-full h-[100px]"
-      ></textarea>
-    </main>
-    <div class="flex justify-end">
-      <input
-        type="button"
-        @click="onComplete"
-        value="완료"
-        class="btn-normal"
-      />
-      <input type="button" @click="onCancel" value="취소" class="btn-normal" />
-    </div>
+    <PostWrite :post="post" @complete="onComplete" @cancel="onCancel" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { PostFetcher } from "@/api/posts";
 import type { Post } from "@/types";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import PostWrite from "@/components/PostWrite.vue";
 import { useRoute, useRouter } from "vue-router";
+
+onMounted(() => {});
 
 const router = useRouter();
 const route = useRoute();
+
 const id = route.params.id as string;
 const post = ref(fetchPost(Number(id)));
-const newPost = ref({ ...post.value });
 
-function onComplete() {
-  PostFetcher.save(newPost.value);
-  router.push(`/post/${post.value.id}`);
+function onComplete(post: Post) {
+  PostFetcher.save(post);
+  router.push(`/post/${post.id}`);
 }
 
 function onCancel() {
