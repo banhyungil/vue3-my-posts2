@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+.text-area {
+    color: #212529;
+    border: 1px solid #ced4da;
+    outline: 0;
+    border-radius: 5px;
+
+    &-focus{
+        background-color: #fff;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+    }
+}
+
+.input-text {
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    outline: 0;
+    &:focus{
+        background-color: #fff;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+    }
+}
 
 * {
     box-sizing: border-box;
@@ -11,17 +37,23 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 1.5rem/* 24px */;
+    line-height: 2rem/* 32px */;
+}
+
 .fr-center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-a {
-    text-decoration: none;
-}
 
-.btn {
+.btn-normal {
     --tw-bg-opacity: 1;
     background-color: rgb(74 222 128 / var(--tw-bg-opacity));
     padding: 0.5rem/* 8px */;
@@ -29,12 +61,16 @@ a {
     color: rgb(226 232 240 / var(--tw-text-opacity));
     font-weight: 700;
     cursor: pointer;
+    margin: 0 2px;
 }
-.btn:hover {
+.btn-normal:hover {
     color: #000;
 }
 
-.btn.disable {
+.btn-normal[type=button]:disabled {
     background-color: #ddd;
     color: #fff;
+    cursor: initial;
 }
+
+

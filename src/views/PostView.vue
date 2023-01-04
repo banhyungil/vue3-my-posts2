@@ -1,45 +1,48 @@
 <template>
-  <div>
+  <div class="mx-3 my-2">
     <header class="flex flex-row justify-center">
-      <h1 class="text-2xl">{{ post.title }}</h1>
+      <h1>{{ post.title }}</h1>
     </header>
     <hr />
-    <main>
+    <main class="my-5 min-h-[50px]">
       <p>{{ post.content }}</p>
     </main>
-    <div class="flex justify-between">
+    <hr />
+    <div class="flex justify-between my-2">
       <div class="move-page-cont">
         <input
           type="button"
           @click="onPrevClicked"
           value="이전"
           :disabled="isPrevDisabled"
-          :class="{ disable: isPrevDisabled }"
-          class="btn"
+          class="btn-normal"
         />
         <input
           type="button"
           @click="onNextClicked"
           value="다음"
           :disabled="isNextDisabled"
-          :class="{ disable: isNextDisabled }"
-          class="btn"
+          class="btn-normal"
         />
       </div>
       <div>
-        <h1>안녕</h1>
-        <input type="button" @click="onListClicked" value="목록" class="btn" />
+        <input
+          type="button"
+          @click="onListClicked"
+          value="목록"
+          class="btn-normal"
+        />
         <input
           type="button"
           @click="onUpdateClicked"
           value="수정"
-          class="btn"
+          class="btn-normal"
         />
         <input
           type="button"
           @click="onRemoveClicked"
           value="삭제"
-          class="btn"
+          class="btn-normal"
         />
       </div>
     </div>
@@ -98,4 +101,4 @@ function onRemoveClicked() {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="postcss"></style>

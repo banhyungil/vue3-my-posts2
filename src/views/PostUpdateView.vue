@@ -1,15 +1,27 @@
 <template>
   <div>
     <header>
-      <input type="text" v-model="newPost.title" class="text-ellipsis" />
+      <input
+        type="text"
+        v-model="newPost.title"
+        class="input-text w-full my-2"
+      />
     </header>
     <hr />
-    <body>
-      <textarea v-model="newPost.content"></textarea>
-    </body>
-    <div>
-      <input type="button" @click="onComplete" value="완료" />
-      <input type="button" @click="onCancel" value="취소" />
+    <main>
+      <textarea
+        v-model="newPost.content"
+        class="text-area w-full h-[100px]"
+      ></textarea>
+    </main>
+    <div class="flex justify-end">
+      <input
+        type="button"
+        @click="onComplete"
+        value="완료"
+        class="btn-normal"
+      />
+      <input type="button" @click="onCancel" value="취소" class="btn-normal" />
     </div>
   </div>
 </template>
