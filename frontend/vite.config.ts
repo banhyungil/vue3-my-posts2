@@ -11,4 +11,11 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  server: {
+    base: "",
+  },
+  build: {
+    outDir: "../backend/public",
+    emptyOutDir: true,
+  },
 });
