@@ -4,7 +4,7 @@ import MyMenu from "./components/MyMenu.vue";
 
 const router = useRouter();
 function write() {
-  router.push("/post/wrtie");
+  router.push("/post/write");
 }
 </script>
 
