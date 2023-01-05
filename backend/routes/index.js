@@ -9,7 +9,7 @@ const router = express.Router();
 */
 router.get('/', function(req, res) {
     console.log("__dirname,", __dirname)
-    const sPath = path.join(__dirname, '../public', 'index.html')
+    const sPath = path.join(__dirname, '../public/index.html')
     console.log('sPath', sPath);
     res.sendFile(sPath);
 })
