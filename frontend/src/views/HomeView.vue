@@ -12,26 +12,13 @@
 import PostItem from "@/components/PostItem.vue";
 import type { Post } from "@/types";
 import { onMounted, ref } from "vue";
-import { format } from "date-fns";
 import { PostFetcher } from "@/api/posts";
 
-onMounted(() => {
-  const newPosts = [] as Post[];
-  for (let i = 1; i < 11; ++i) {
-    const obj = {
-      id: i,
-      title: i + "제목",
-      content: i + "내용. 반갑습니다.",
-      date: format(new Date(), "yyyy/MM/dd"),
-      author: i + "half",
-    };
-
-    newPosts.push(obj);
-  }
-  localStorage.setItem("posts", JSON.stringify(newPosts));
+const posts = ref([] as Post[]);
+onMounted(async () => {
+  posts.value = await PostFetcher.fetchAll();
+  console.log("posts", posts.value);
 });
-
-const posts = ref(PostFetcher.fetchAll());
 </script>
 
 <style scoped>

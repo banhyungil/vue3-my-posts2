@@ -17,7 +17,7 @@ const router = useRouter();
 const route = useRoute();
 
 const id = route.params.id as string;
-const post = ref(fetchPost(Number(id)));
+const post = ref(await fetchPost(Number(id)));
 
 function onComplete(post: Post) {
   PostFetcher.save(post);
@@ -28,9 +28,11 @@ function onCancel() {
   router.push(`/post/${post.value.id}`);
 }
 
-function fetchPost(id: number) {
-  const post = PostFetcher.fetch(id);
-  if (post == null) router.push("/");
+async function fetchPost(id: number) {
+  const post = await PostFetcher.fetch(id);
+  if (post == null || post == undefined) {
+    router.push("/");
+  }
 
   return post as Post;
 }

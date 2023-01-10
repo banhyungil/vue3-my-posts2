@@ -58,9 +58,9 @@ import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const id = route.params.id as string;
-const post = ref(fetchPost(Number(id)));
+const post = ref(await fetchPost(Number(id)));
 
-const maxPost = PostFetcher.fetchMax() as Post;
+const maxPost = (await PostFetcher.fetchMax()) as Post;
 
 const isPrevDisabled = computed(() => {
   return post.value.id - 1 == 0;
@@ -69,14 +69,14 @@ const isNextDisabled = computed(() => {
   return post.value.id + 1 > maxPost.id;
 });
 
-function onPrevClicked() {
+async function onPrevClicked() {
   const prevId = post.value.id - 1;
-  post.value = fetchPost(prevId);
+  post.value = await fetchPost(prevId);
 }
 
-function onNextClicked() {
+async function onNextClicked() {
   const nextId = post.value.id + 1;
-  const nextPost = fetchPost(nextId);
+  const nextPost = await fetchPost(nextId);
   post.value = nextPost;
 }
 
@@ -84,8 +84,8 @@ function onListClicked() {
   router.push("/");
 }
 
-function fetchPost(id: number) {
-  const post = PostFetcher.fetch(id);
+async function fetchPost(id: number) {
+  const post = await PostFetcher.fetch(id);
   if (post == null) router.push("/");
 
   return post as Post;
