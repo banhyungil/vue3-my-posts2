@@ -1,6 +1,11 @@
 <template>
   <div>
-    <PostWrite :post="post" @complete="onComplete" @cancel="onCancel" />
+    <PostWrite
+      v-if="post"
+      :post="post"
+      @complete="onComplete"
+      @cancel="onCancel"
+    />
   </div>
 </template>
 
@@ -11,17 +16,18 @@ import { ref, onMounted } from "vue";
 import PostWrite from "@/components/PostWrite.vue";
 import { useRoute, useRouter } from "vue-router";
 
-onMounted(() => {});
-
+const post = ref({} as Post);
 const router = useRouter();
 const route = useRoute();
 
-const id = route.params.id as string;
-const post = ref(await fetchPost(Number(id)));
+onMounted(async () => {
+  const id = route.params.id as string;
+  post.value = await fetchPost(Number(id));
+});
 
-function onComplete(post: Post) {
-  PostFetcher.save(post);
-  router.push(`/post/${post.id}`);
+function onComplete(newPost: Post) {
+  PostFetcher.update(newPost);
+  router.push(`/post/${newPost.id}`);
 }
 
 function onCancel() {
@@ -30,7 +36,7 @@ function onCancel() {
 
 async function fetchPost(id: number) {
   const post = await PostFetcher.fetch(id);
-  if (post == null || post == undefined) {
+  if (post == null) {
     router.push("/");
   }
 

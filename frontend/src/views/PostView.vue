@@ -1,11 +1,11 @@
 <template>
   <div class="mx-3 my-2">
     <header class="flex flex-row justify-center">
-      <h1>{{ post.title }}</h1>
+      <h1>{{ cPost.title }}</h1>
     </header>
     <hr />
     <main class="my-5 min-h-[50px]">
-      <p>{{ post.content }}</p>
+      <p>{{ cPost.content }}</p>
     </main>
     <hr />
     <div class="flex justify-between my-2">
@@ -14,14 +14,14 @@
           type="button"
           @click="onPrevClicked"
           value="이전"
-          :disabled="isPrevDisabled"
+          :disabled="cIsPrevDisabled"
           class="btn-normal"
         />
         <input
           type="button"
           @click="onNextClicked"
           value="다음"
-          :disabled="isNextDisabled"
+          :disabled="cIsNextDisabled"
           class="btn-normal"
         />
       </div>
@@ -51,52 +51,48 @@
 
 <script setup lang="ts">
 import { PostFetcher } from "@/api/posts";
-import type { Post } from "@/types";
-import { ref, computed } from "vue";
+import { usePostsStore } from "@/stores/posts";
+import { ref, computed, onBeforeMount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
 const route = useRoute();
-const id = route.params.id as string;
-const post = ref(await fetchPost(Number(id)));
+const postsStore = usePostsStore();
+const posts = postsStore.posts;
 
-const maxPost = (await PostFetcher.fetchMax()) as Post;
+const curIdx = ref(0);
 
-const isPrevDisabled = computed(() => {
-  return post.value.id - 1 == 0;
+onBeforeMount(async () => {
+  const id = Number(route.params.id);
+  curIdx.value = posts.findIndex((post) => post.id == id);
 });
-const isNextDisabled = computed(() => {
-  return post.value.id + 1 > maxPost.id;
-});
+
+const cPost = computed(() => posts[curIdx.value]);
+const cIsNextDisabled = computed(() => curIdx.value >= posts.length - 1);
+const cIsPrevDisabled = computed(() => curIdx.value <= 0);
 
 async function onPrevClicked() {
-  const prevId = post.value.id - 1;
-  post.value = await fetchPost(prevId);
+  curIdx.value--;
+  const id = cPost.value.id;
+  router.push(`/post/${id}`);
 }
 
 async function onNextClicked() {
-  const nextId = post.value.id + 1;
-  const nextPost = await fetchPost(nextId);
-  post.value = nextPost;
+  curIdx.value++;
+  const id = cPost.value.id;
+  router.push(`/post/${id}`);
 }
 
 function onListClicked() {
   router.push("/");
 }
 
-async function fetchPost(id: number) {
-  const post = await PostFetcher.fetch(id);
-  if (post == null) router.push("/");
-
-  return post as Post;
-}
-
 function onUpdateClicked() {
-  router.push(`/post/${post.value.id}/update`);
+  router.push(`/post/${cPost.value.id}/update`);
 }
 
 function onRemoveClicked() {
-  PostFetcher.remove(post.value.id);
+  PostFetcher.remove(cPost.value.id);
   router.push("/");
 }
 </script>

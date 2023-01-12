@@ -23,7 +23,7 @@ export const PostFetcher = {
   },
 
   fetch(id: number) {
-    return axios.get(`${baseURL}/posts/id`).then((res) => {
+    return axios.get(`${baseURL}/posts/${id}`).then((res) => {
       return res.data;
     });
   },
@@ -47,10 +47,17 @@ export const PostFetcher = {
   },
 
   remove(id: number) {
-    const url = `${baseURL}/posts`;
-    const data = post;
+    const url = `${baseURL}/posts/${id}`;
 
-    return axios.put(url, data).then((res) => {
+    return axios.delete(url).then((res) => {
+      return res.data;
+    });
+  },
+
+  test() {
+    const url = `${baseURL}/test`;
+
+    return axios.post(url, { name: "ban" }).then((res) => {
       return res.data;
     });
   },

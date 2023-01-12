@@ -13,12 +13,16 @@ import PostItem from "@/components/PostItem.vue";
 import type { Post } from "@/types";
 import { onMounted, ref } from "vue";
 import { PostFetcher } from "@/api/posts";
+import { usePostsStore } from "@/stores/posts";
 
+const postsStore = usePostsStore();
 const posts = ref([] as Post[]);
+
 onMounted(async () => {
-  posts.value = await PostFetcher.fetchAll();
-  console.log("posts", posts.value);
+  posts.value = await postsStore.fetchAll();
 });
+
+PostFetcher.test();
 </script>
 
 <style scoped>

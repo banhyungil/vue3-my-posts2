@@ -13,15 +13,15 @@ exports.select = function select(id) {
 }
 
 exports.insert = function insert(post) {
-    const sql = `insert into post(id,title, content, date, author) values(null, ?, ?, date_format(sysdate(), "%Y%m%d"), ?);`
+    const sql = `insert into post(id, title, content, date, author) values(null, ?, ?, date_format(sysdate(), "%Y%m%d"), ?);`
 
     return connection.query(sql, [post.title, post.content, post.author])
 }
 
-exports.update = function update(id, post) {
+exports.update = function update(post) {
     const sql = `update post set title = ?, content = ?, date = date_format(sysdate(), "%Y%m%d") where id=?`;
 
-    return connection.query(sql, post.title, post.content, post.id)
+    return connection.query(sql, [post.title, post.content, post.id])
 }
 
 exports.delete = function remove(id) {

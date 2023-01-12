@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import type { Post } from "@/types";
-import { ref, type Ref } from "vue";
+import { ref, watch } from "vue";
 
 export interface Props {
   post?: Post;
@@ -40,12 +40,20 @@ const props = withDefaults(defineProps<Props>(), {
   },
 });
 
-const cpPost: Ref<Post> = ref({ ...props.post });
-
 const emit = defineEmits<{
   (e: "complete", post: Post): void;
   (e: "cancel"): void;
 }>();
+
+const cpPost = ref({} as Post);
+
+// getter function 이용
+watch(
+  () => props.post,
+  (newPost) => {
+    cpPost.value = { ...newPost };
+  }
+);
 
 function onComplete() {
   emit("complete", cpPost.value);

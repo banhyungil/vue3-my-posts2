@@ -26,6 +26,13 @@ router.get('/', function(req, res) {
     res.sendFile(sPath);
 })
 
+/** test*/
+router.post("/test", (req, res) => {
+    console.log('req.params', req.params);
+    console.log('req.body', req.body);
+    console.log('req.query', req.query);
+})
+
 const postRouter = require("./post")
 router.use("/posts", postRouter)
 
