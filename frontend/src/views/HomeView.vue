@@ -10,19 +10,15 @@
 
 <script setup lang="ts">
 import PostItem from "@/components/PostItem.vue";
-import type { Post } from "@/types";
 import { onMounted, ref } from "vue";
-import { PostFetcher } from "@/api/posts";
 import { usePostsStore } from "@/stores/posts";
 
 const postsStore = usePostsStore();
-const posts = ref([] as Post[]);
+const posts = ref(postsStore.posts);
 
 onMounted(async () => {
-  posts.value = await postsStore.fetchAll();
+  if (posts.value.length == 0) posts.value = await postsStore.fetchAll();
 });
-
-PostFetcher.test();
 </script>
 
 <style scoped>
