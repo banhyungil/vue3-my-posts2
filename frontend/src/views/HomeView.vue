@@ -10,8 +10,8 @@
 
 <script setup lang="ts">
 import PostItem from "@/components/PostItem.vue";
-import { onMounted, ref } from "vue";
 import { usePostsStore } from "@/stores/posts";
+import { onMounted, ref } from "vue";
 
 const postsStore = usePostsStore();
 const posts = ref(postsStore.posts);
