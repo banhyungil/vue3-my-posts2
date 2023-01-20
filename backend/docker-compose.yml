@@ -1,0 +1,19 @@
+services:
+  app:
+    build: .
+    command: "node server.js"
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - v-post:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=post
+volumes:
+  v-post:

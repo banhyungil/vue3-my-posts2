@@ -9,8 +9,8 @@ export const usePostsStore = defineStore("posts", {
       this.posts = await PostFetcher.fetchAll();
       return this.posts;
     },
-    getPost(id: Number) {
-      return this.posts.find((post) => post.id == id) ?? ({} as Post);
+    async getPost(id: number) {
+      return await PostFetcher.fetch(id);
     },
   },
 });

@@ -33,7 +33,7 @@
       type="button"
       value=">>"
       @click="nextGroup"
-      :disabled="cTotalPage <= curPageGroup * pageGroupSize"
+      :disabled="cTotalPage >= curPageGroup * pageGroupSize"
     />
   </div>
   <div>

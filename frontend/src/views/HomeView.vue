@@ -17,7 +17,7 @@ const postsStore = usePostsStore();
 const posts = ref(postsStore.posts);
 
 onMounted(async () => {
-  if (posts.value.length == 0) posts.value = await postsStore.fetchAll();
+  posts.value = await postsStore.fetchAll();
 });
 </script>
 

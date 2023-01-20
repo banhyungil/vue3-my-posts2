@@ -24,7 +24,7 @@ export const PostFetcher = {
 
   fetch(id: number) {
     return axios.get(`${baseURL}/posts/${id}`).then((res) => {
-      return res.data;
+      return res.data as Post;
     });
   },
 

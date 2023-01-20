@@ -5,16 +5,20 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+
 import { PostFetcher } from "@/api/posts";
 import type { Post } from "@/types";
 import PostWrite from "@/components/PostWrite.vue";
-import { useRouter } from "vue-router";
+import { usePostsStore } from "@/stores/posts";
 
 const router = useRouter();
+const postStore = usePostsStore();
 
-function onComplete(post: Post) {
+async function onComplete(post: Post) {
   post.author = "ban";
-  PostFetcher.insert(post);
+  await PostFetcher.insert(post);
+
   goHome();
 }
 

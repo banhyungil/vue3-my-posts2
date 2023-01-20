@@ -55,9 +55,6 @@ const routerOption: RouterOptions = {
 
 const router = createRouter(routerOption);
 
-router.beforeEach((to, from) => {
-  console.log("to", to);
-  console.log("from", from);
-});
+router.beforeEach((to, from) => {});
 
 export default router;

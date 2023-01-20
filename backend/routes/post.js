@@ -22,6 +22,7 @@ postRouter.put("/", (req, res) => {
 })
 
 postRouter.post("/", (req, res) => {
+    console.log('insert req.body', req.body);
     post.insert(req.body)
     res.send()
 })

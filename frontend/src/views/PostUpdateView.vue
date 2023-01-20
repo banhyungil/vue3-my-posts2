@@ -25,8 +25,8 @@ onMounted(async () => {
   post.value = await fetchPost(Number(id));
 });
 
-function onComplete(newPost: Post) {
-  PostFetcher.update(newPost);
+async function onComplete(newPost: Post) {
+  await PostFetcher.update(newPost);
   router.push(`/post/${newPost.id}`);
 }
 

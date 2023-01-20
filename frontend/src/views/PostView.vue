@@ -52,23 +52,26 @@
 <script setup lang="ts">
 import { PostFetcher } from "@/api/posts";
 import { usePostsStore } from "@/stores/posts";
-import { ref, computed, onBeforeMount } from "vue";
+import type { Post } from "@/types";
+import { ref, reactive, computed, onBeforeMount } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
 const route = useRoute();
 const postsStore = usePostsStore();
-const posts = postsStore.posts;
+const posts = ref([] as Post[]);
 
 const curIdx = ref(0);
 
 onBeforeMount(async () => {
+  posts.value = await postsStore.fetchAll();
+
   const id = Number(route.params.id);
-  curIdx.value = posts.findIndex((post) => post.id == id);
+  curIdx.value = posts.value.findIndex((post) => post.id == id);
 });
 
-const cPost = computed(() => posts[curIdx.value]);
-const cIsNextDisabled = computed(() => curIdx.value >= posts.length - 1);
+const cPost = computed(() => posts.value[curIdx.value] || {});
+const cIsNextDisabled = computed(() => curIdx.value >= posts.value.length - 1);
 const cIsPrevDisabled = computed(() => curIdx.value <= 0);
 
 async function onPrevClicked() {
@@ -91,8 +94,8 @@ function onUpdateClicked() {
   router.push(`/post/${cPost.value.id}/update`);
 }
 
-function onRemoveClicked() {
-  PostFetcher.remove(cPost.value.id);
+async function onRemoveClicked() {
+  await PostFetcher.remove(cPost.value.id);
   router.push("/");
 }
 </script>
